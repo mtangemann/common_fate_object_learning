@@ -1,0 +1,50 @@
+seed: 0
+
+model:
+  type: DoubleDecoderVAE
+  sample_size: [64, 128]
+  latent_dims: 128
+  image_hidden_dims: [32, 32, 64, 64, 128, 128, 256, 256, 512, 512]
+  image_hidden_strides: [2, 1, 2, 1, 2, 1, 2, 1, 2, 1]
+  mask_hidden_dims: [32, 32, 64, 64, 128, 128, 256, 256, 512, 512]
+  mask_hidden_strides: [2, 1, 2, 1, 2, 1, 2, 1, 2, 1]
+  normalization: groupnorm
+  beta: 0.0001
+  image_loss_type: mse
+  mask_loss_weight: 0.1
+  consistency_dims: 0
+  consistency_loss_weight: 0.02
+  normalize_samples_in_loss: False
+ 
+dataloaders:
+  training:
+    data_path: /scratch/data/train/objects #data/fishbowl-train-objects
+    batch_size: 72
+    num_workers: 24
+    image_size: 64
+    num_distractors: 0
+    num_frames_per_object: 2
+    hallucinate: True
+  
+  validation:
+    data_path: /scratch/data/objects-val #data/fishbowl-val-objects
+    batch_size: 144
+    num_workers: 24
+    image_size: 64
+
+optimizer:
+  lr: 0.0001
+  weight_decay: 0.0
+
+scheduler:
+  type: MultiStepLR
+  milestones: [40]
+  gamma: 0.1
+
+training:
+  num_epochs: 60
+  keep_checkpoint_frequency: 8
+  validation_frequency: 1
+
+final_evaluation:
+  seeds: [0, 1, 2]

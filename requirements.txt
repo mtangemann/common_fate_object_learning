@@ -1,0 +1,14 @@
+click==7.1.2
+joblib==1.0.1
+jupyterlab==3.0.14
+matplotlib==3.4.2
+pandas==1.2.4
+Pillow==8.2.0
+PyYAML==5.1.2
+pycocotools==2.0.2
+scikit-image==0.18.1
+scikit-video==1.1.11
+tensorboard==2.5.0
+torch==1.8.1
+torchvision==0.9.1
+tqdm==4.60.0
